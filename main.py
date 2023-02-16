@@ -10,14 +10,14 @@ from model.users import initUsers
 
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
-from api.joke import joke_api # Blueprint import api definition
+from api.search import search_api 
 from api.user import user_api # Blueprint import api definition
 
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
 # register URIs
-app.register_blueprint(joke_api) # register api routes
+app.register_blueprint(search_api)
 app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
@@ -43,6 +43,4 @@ def activate_job():
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
-    from flask_cors import CORS
-    cors = CORS(app)
     app.run(debug=True, host="0.0.0.0", port="8792")
