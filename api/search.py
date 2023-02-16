@@ -21,7 +21,7 @@ def searchItem(item):
   url = "https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe"
   querystring = {"query": item}
   headers = {
-      "X-RapidAPI-Key": "32d5282f94msh36a081cfb06e672p1c2a8cjsn851d00873829",
+      "X-RapidAPI-Key": "Ci/aC4IA5gNLf//wEXZBJA==IMfyqvfjeAJs6BtI",
       "X-RapidAPI-Host": "recipe-by-api-ninjas.p.rapidapi.com"
   }
 
