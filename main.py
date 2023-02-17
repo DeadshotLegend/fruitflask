@@ -35,6 +35,10 @@ def index():
 def stub():
     return render_template("stub.html")
 
+@app.route('/match/')  # connects /stub/ URL to stub() function
+def match():
+    return render_template("match.html")
+
 @app.before_first_request
 def activate_job():
     initJokes()
@@ -43,6 +47,6 @@ def activate_job():
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
-    from flask_cors import CORS
-    cors = CORS(app)
+    #from flask_cors import CORS
+    #cors = CORS(app)
     app.run(debug=True, host="0.0.0.0", port="8792")
