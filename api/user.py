@@ -86,4 +86,3 @@ class UserAPI:
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
     api.add_resource(_Security, '/authenticate')
-    
