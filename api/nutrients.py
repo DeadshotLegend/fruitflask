@@ -14,7 +14,7 @@ api = Api(nutrients_api)
 def nutrient(food):
 	url = "https://edamam-food-and-grocery-database.p.rapidapi.com/parser"
 
-	querystring = {"ingr":"apple"}
+	querystring = {"ingr":food}
 
 	headers = {
 		"X-RapidAPI-Key": "6615470177msh2eb9d9776c82332p163317jsn65585d1a22d9",
