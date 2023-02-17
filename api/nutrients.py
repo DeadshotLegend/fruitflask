@@ -23,7 +23,7 @@ def nutrient(food):
 
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	rj = response.json()
-	print(rj["parsed"][0]["food"]["nutrients"])
+	return rj["parsed"][0]["food"]["nutrients"]
  
 class itemAPI:
 	class _Create(Resource):
