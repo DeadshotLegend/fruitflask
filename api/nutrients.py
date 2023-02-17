@@ -20,10 +20,24 @@ def nutrient(food):
 		"X-RapidAPI-Key": "6615470177msh2eb9d9776c82332p163317jsn65585d1a22d9",
 		"X-RapidAPI-Host": "edamam-food-and-grocery-database.p.rapidapi.com"
 	}
-
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	rj = response.json()
-	return rj["parsed"][0]["food"]["nutrients"]
+	rj["parsed"][0]["food"]["nutrients"]
+	text=""
+	for nut in ['ENERC_KCAL','PROCNT', 'FAT', 'CHOCDF', 'FIBTG']:
+		if nut == "ENERC_KCAL":
+			text+="Calories: " + ["parsed"][0]["food"]["nutrients"][nut] + "kcal\n"
+		if nut == "PROCNT":
+			text+="Proteins: " + ["parsed"][0]["food"]["nutrients"][nut] + "g\n"
+		if nut == "FAT":
+			text+="fats: " + ["parsed"][0]["food"]["nutrients"][nut] + "g\n"
+		if nut == "CHOCDF":
+			text+="Carbonhydrates: " + ["parsed"][0]["food"]["nutrients"][nut] + "g\n"
+		if nut == "FIBTG":
+			text+="Fibers: " + ["parsed"][0]["food"]["nutrients"][nut] + "g"
+		
+	ans={"text":text}
+	return ans
  
 class itemAPI:
 	class _Create(Resource):
