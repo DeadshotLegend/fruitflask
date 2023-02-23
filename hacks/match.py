@@ -163,7 +163,6 @@ username = StringVar()
 final_time = Label(end_frame, text="Your Time: {0:.2f}".format(timePassed), font=("Arial", 24))
 nameEntry = Entry(end_frame, textvariable=username, font=("Arial", 16))
 nameButton = Button(end_frame, text="Continue", font=("Arial", 16), command=cont)
-replayButton = Button(end_frame, text="Replay", font=("Arial", 16), command=restart)
 
 for i in range(36):
     button = buttons[i]
