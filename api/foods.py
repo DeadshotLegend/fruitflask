@@ -31,6 +31,7 @@ class foodAPI:
                 return {'message': f'image is missing'}, 210
 
             ''' #1: Key code block, setup USER OBJECT '''
+            uo = {}
             uo = food(name=name, 
                       points=points,
                       image=image)
@@ -48,7 +49,9 @@ class foodAPI:
     class _Read(Resource):
         def get(self):
             foods = food.query.all()    # read/extract all users from database
-            json_ready = [food.read() for food in foods]  # prepare output in json
+            json_ready = {'foodstorage' : [food.read() for food in foods] }
+    
+            # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
     # building RESTapi endpoint

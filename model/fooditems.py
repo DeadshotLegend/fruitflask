@@ -109,19 +109,21 @@ class food(db.Model):
 
 # Builds working data for testing
 def initfooditem():
-    """Create database and tables"""
-    db.create_all()
-    """Tester data for table"""
-    u1 = food(name='Burger', points='10', image='https://png.pngtree.com/png-vector/20190130/ourlarge/pngtree-cute-minimalist-creative-cartoon-hamburger-png-image_611163.jpg')
+    with app.app_context():
+        """Create database and tables"""
+        db.create_all()
+        """Tester data for table"""
+        u1 = food(name='Burger', points='10', image='https://png.pngtree.com/png-vector/20190130/ourlarge/pngtree-cute-minimalist-creative-cartoon-hamburger-png-image_611163.jpg')
+        u2 = food(name= 'Fries', points='20', image='https://thumbs.dreamstime.com/b/french-fries-cartoon-clipart-red-paper-box-carton-121897301.jpg')
 
-    fooditems = [u1]
+        fooditems = [u1, u2]
 
-    """Builds sample table"""
-    for h in fooditems:
-        try:
-            h.create()
-        except IntegrityError:
-            '''fails with bad or duplicate data'''
-            db.session.remove()
-            print(f"Records exist, duplicate email, or error: {food.id}")
+        """Builds sample table"""
+        for h in fooditems:
+            try:
+                h.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate email, or error: {food.id}")
             
