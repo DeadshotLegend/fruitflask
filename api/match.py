@@ -36,7 +36,7 @@ class UserAPI:
             if user:
                 return jsonify(user.read())
             # failure returns error
-            return {'message': f'error'}, 210
+            return {'message': f'error'}, 235
 
     class _Read(Resource):
         def get(self):
