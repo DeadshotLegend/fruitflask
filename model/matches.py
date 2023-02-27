@@ -188,22 +188,21 @@ class Player:
 
     def read(self):
         return {
-            "id": self.id,
-            "name" : self.name,
-            "points" : self.points,
-            "image" : self.image
+            "name" : self._name,
+            "points" : self._time,
+            "image" : self._flips
         }
 
     # CRUD update: updates
     # returns self
-    def update(self, name="", points="", image=""):
+    def update(self, name="", time="", flips=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
-        if len(points) > 0:
-            self.restaurant = points
-        if len(image) > 0:
-            self.protein = image
+        if len(time) > 0:
+            self._time = time
+        if len(flips) > 0:
+            self._flips = flips
         db.session.commit()
         return self
 
@@ -213,3 +212,21 @@ class Player:
         db.session.delete(self)
         db.session.commit()
         return None
+
+def initfooditem():
+    with app.app_context():
+        """Create database and tables"""
+        db.create_all()
+        """Tester data for table"""
+        u1 = Player(name='god', time='0.01', flips='8')
+
+        fooditems = [u1]
+
+        """Builds sample table"""
+        for h in fooditems:
+            try:
+                h.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate email, or error: {food.id}")
