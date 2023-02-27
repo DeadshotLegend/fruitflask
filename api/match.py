@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
 from datetime import datetime
 
-from model.player import Player
+from model.matches import Player
 
 def comp(a):
 	return a._time
