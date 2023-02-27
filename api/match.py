@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
 from datetime import datetime
 
-from model.matches import Player
+from model.matches import Match
 
 def comp(a):
 	return a._time
@@ -30,7 +30,7 @@ class UserAPI:
             flips = body.get('flips')
 
             ''' #1: Key code block, setup USER OBJECT '''
-            uo = Player(name=name, time=time, flips=flips)
+            uo = Match(name=name, time=time, flips=flips)
             user = uo.create()
             # success returns json of user
             if user:
@@ -40,7 +40,7 @@ class UserAPI:
 
     class _Read(Resource):
         def get(self):
-            users = Player.query.all()    # read/extract all users from database
+            users = Match.query.all()    # read/extract all users from database
             json_ready = [user.read() for user in users]  # prepare output in json
             json_ready.sort()
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
