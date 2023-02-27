@@ -27,13 +27,11 @@ class PlayerAPI:
                 return {'message': f'User ID is missing, or is less than 2 characters'}, 210
             # get info from request body
             password = body.get('password')
-            tokens = body.get('tokens')
 
             ''' #1: Key code block, setup USER OBJECT '''
             newPlayer = Player(
                     name=name, 
                     uid=uid,
-                    tokens=tokens,
                     )
             
             ''' Additional garbage error checking '''

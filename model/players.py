@@ -21,17 +21,15 @@ class Player(db.Model):
     _name = db.Column(db.String(255), unique=False, nullable=False)
     _uid = db.Column(db.String(255), unique=True, nullable=False)
     _password = db.Column(db.String(255), unique=False, nullable=False)
-    _tokens = db.Column(db.Integer)
 
     # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
     
 
     # constructor of a User object, initializes the instance variables within object (self)
-    def __init__(self, name, uid, tokens, password="123qwerty"):
+    def __init__(self, name, uid, password="123qwerty"):
         self._name = name    # variables with self prefix become part of the object, 
         self._uid = uid
         self.set_password(password)
-        self._tokens = tokens
 
     # a name getter method, extracts name from object
     @property
@@ -73,16 +71,7 @@ class Player(db.Model):
         return result
     
     # dob property is returned as string, to avoid unfriendly outcomes
-    @property
-    def tokens(self):
-        return self._tokens
-    
-    # dob should be have verification for type date
-    @tokens.setter
-    def tokens(self, tokens):
-        self._tokens = tokens
-    
-    
+
     # output content using str(object) in human readable form, uses getter
     # output content using json dumps, this is ready for API response
     def __str__(self):
@@ -107,13 +96,12 @@ class Player(db.Model):
             "id": self.id,
             "name": self.name,
             "uid": self.uid,
-            "tokens": self.tokens,
             "password": self._password
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, dictionary): #name="", uid="", password="", tokens=0):
+    def update(self, dictionary): #name="", uid="", password="":
         """only updates values with length"""
         for key in dictionary:
             if key == "name":
@@ -122,8 +110,6 @@ class Player(db.Model):
                 self.uid = dictionary[key]
             if key == "password":
                 self.set_password(dictionary[key])
-            if key == "tokens":
-                self.tokens = dictionary[key]
         db.session.commit()
         return self
 
@@ -144,10 +130,10 @@ def initPlayers():
         """Create database and tables"""
         db.create_all()
         """Tester data for table"""
-        u1 = Player(name='Ryan', uid='ryan', password='ryan12', tokens=45)
-        u2 = Player(name='Lucas', uid='lucas', password='lucas12', tokens=41)
-        u3 = Player(name='Shivansh', uid='shivansh', password='shivansh12!!', tokens=40)
-        u4 = Player(name='Haoxuan', uid='haoxuan', password='haoxuan12', tokens=38)
+        u1 = Player(name='Ryan', uid='ryan', password='ryan12')
+        u2 = Player(name='Lucas', uid='lucas', password='lucas12')
+        u3 = Player(name='Shivansh', uid='shivansh', password='shivansh12!!')
+        u4 = Player(name='Haoxuan', uid='haoxuan', password='haoxuan12')
 
         users = [u1, u2, u3, u4]
 
