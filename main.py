@@ -9,12 +9,16 @@ from __init__ import app  # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.fooditems import initfooditem
+from model.leaderboard_ninja import inittopscores
+from model.players import initPlayers
 
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
 from api.search import search_api 
 from api.user import user_api # Blueprint import api definition
 from api.foods import food_api
+from api.Topscores_ninja import topscores_api
+from api.player import player_api
 
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
@@ -25,6 +29,8 @@ app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
 app.register_blueprint(food_api)
+app.register_blueprint(topscores_api)
+app.register_blueprint(player_api)
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
@@ -48,6 +54,9 @@ def activate_job():
     initJokes()
     initUsers()
     initfooditem()
+    inittopscores()
+    initPlayers()
+
 
 # this runs the application on the development server
 if __name__ == "__main__":
