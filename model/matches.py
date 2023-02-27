@@ -8,13 +8,7 @@ from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
 
 class food(db.Model):
-    __tablename__ = 'foods'  # table name is plural, class name is singular
-
-    # Define the heal schema with "vars" from object
-    id = db.Column(db.Integer, primary_key=True)
-    _name = db.Column(db.String(255), unique=True, nullable=False)
-    _points = db.Column(db.String(255), unique=False, nullable=False)
-    _image = db.Column(db.String(255), unique=True, nullable=False)
+    
 
 
     # constructor of a heal object, initializes the instance variables within object (self)
@@ -131,7 +125,14 @@ import json
 
 # Define a User Class/Template
 # -- A User represents the data we want to manage
-class Player:    
+class Player:
+    __tablename__ = 'match'  # table name is plural, class name is singular
+
+    # Define the heal schema with "vars" from object
+    id = db.Column(db.Integer, primary_key=True)
+    _name = db.Column(db.String(255), unique=True, nullable=False)
+    _time = db.Column(db.String(255), unique=False, nullable=False)
+    _flips = db.Column(db.String(255), unique=True, nullable=False) 
     # constructor of a User object, initializes the instance variables within object (self)
     def __init__(self, name, time, flips):
         self._name = name    # variables with self prefix become part of the object, 
