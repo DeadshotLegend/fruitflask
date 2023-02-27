@@ -7,21 +7,19 @@ import json
 from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
 
-class food(db.Model):
-    __tablename__ = 'foods'  # table name is plural, class name is singular
+class topscore(db.Model):
+    __tablename__ = 'topscores'  # table name is plural, class name is singular
 
     # Define the heal schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=True, nullable=False)
     _points = db.Column(db.String(255), unique=False, nullable=False)
-    _image = db.Column(db.String(255), unique=True, nullable=False)
 
 
     # constructor of a heal object, initializes the instance variables within object (self)
-    def __init__(self, name, points, image):
+    def __init__(self, name, points):
         self._name = name
         self._points = points
-        self._image = image
 
        # ---------------------------name
     @property
@@ -37,28 +35,20 @@ class food(db.Model):
     @points.setter
     def points(self, points):
         self._points = points
-    # --------------------------image
-    @property
-    def image(self):
-        return self._image
-    @image.setter
-    def image(self, image):
-        self._image = image
     
     # -------------------------output
     @property
     def dictionary(self):
         dict = {
             "name" : self.name,
-            "points" : self.points,
-            "image" : self.image
+            "points" : self.points
         }
         return dict
         
     def __str__(self):
         return json.dumps(self.dictionary())
     def __repr__(self):
-        return f'Food(name={self._name}, points={self._points}, image={self._image})'
+        return f'Food(name={self._name}, points={self._points})'
 
     # CRUD create/add a new record to the table
     # returns self or None on error
@@ -79,20 +69,17 @@ class food(db.Model):
         return {
             "id": self.id,
             "name" : self.name,
-            "points" : self.points,
-            "image" : self.image
+            "points" : self.points
         }
 
     # CRUD update: updates
     # returns self
-    def update(self, name="", points="", image=""):
+    def update(self, name="", points=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
         if len(points) > 0:
             self.restaurant = points
-        if len(image) > 0:
-            self.protein = image
         db.session.commit()
         return self
 
@@ -108,22 +95,22 @@ class food(db.Model):
 
 
 # Builds working data for testing
-def initfooditem():
+def inittopscores():
     with app.app_context():
         """Create database and tables"""
         db.create_all()
         """Tester data for table"""
-        u1 = food(name='Burger', points='10', image='https://png.pngtree.com/png-vector/20190130/ourlarge/pngtree-cute-minimalist-creative-cartoon-hamburger-png-image_611163.jpg')
-        u2 = food(name= 'Fries', points='20', image='https://thumbs.dreamstime.com/b/french-fries-cartoon-clipart-red-paper-box-carton-121897301.jpg')
+        u1 = topscore(name='Name', points='0')
+        u2 = topscore(name='CoolerName', points='0')
 
-        fooditems = [u1, u2]
+        scores = [u1, u2]
 
         """Builds sample table"""
-        for h in fooditems:
+        for h in scores:
             try:
                 h.create()
             except IntegrityError:
                 '''fails with bad or duplicate data'''
                 db.session.remove()
-                print(f"Records exist, duplicate email, or error: {food.id}")
+                print(f"Records exist, duplicate email, or error: {topscore.id}")
             
