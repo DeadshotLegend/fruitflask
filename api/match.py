@@ -34,7 +34,9 @@ class UserAPI:
             user = uo.create()
             # success returns json of user
             if user:
-                return jsonify(user.read())
+                json_ready = [user.read() for user in users]  # prepare output in json
+                json_ready.sort(key=comp)
+                return jsonify(json_ready)
             # failure returns error
             return {'message': f'error'}, 235
 
