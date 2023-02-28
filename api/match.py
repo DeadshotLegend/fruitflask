@@ -5,7 +5,7 @@ from datetime import datetime
 from model.matches import Match
 
 def comp(a):
-	return a._time
+    return a["time"]
 
 # blueprint, which is registered to app in main.py
 match_api = Blueprint('match_api', __name__,
@@ -42,7 +42,7 @@ class UserAPI:
         def get(self):
             users = Match.query.all()    # read/extract all users from database
             json_ready = [user.read() for user in users]  # prepare output in json
-            json_ready.sort()
+            json_ready.sort(key=comp)
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
     # building RESTapi endpoint

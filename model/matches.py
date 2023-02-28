@@ -10,7 +10,7 @@ class Match(db.Model):
 
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
-    _name = db.Column(db.String(255), unique=True, nullable=False)
+    _name = db.Column(db.String(255), unique=False, nullable=False)
     _time = db.Column(db.String(255), unique=False, nullable=False)
     _flips = db.Column(db.String(255), unique=True, nullable=False) 
 
