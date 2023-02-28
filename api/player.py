@@ -46,7 +46,9 @@ class PlayerAPI:
             player = newPlayer.create()
             # if successful, it will return the new json object that is added
             if player:
-                return jsonify(player.read())
+                players = Player.query.all()    # read/extract all users from database
+                json_ready = [player.read() for player in players]  # prepare output in json
+                return jsonify(json_ready) 
             # incase of failure, it will return an error
             return {'message': f'Processed {name}, either a format error or User ID {uid} is duplicate'}, 210
 
